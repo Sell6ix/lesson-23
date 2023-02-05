@@ -9,9 +9,7 @@ app = Flask(__name__)
 
 @app.route('/perform_query', methods=['GET', 'POST'])
 def post():
-    req = request.data
-    req = req.decode()
-    req = ast.literal_eval(req)
+    req = json.loads(request.data)
     path = os.path.abspath(f'data/{req["file_name"]}')
 
     with open(path, 'r', encoding='utf-8') as file:
